@@ -1,0 +1,21 @@
+body {
+    background-color: peachpuff;
+  }
+  
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+  }
+  
+  #app-title {
+    background-color: whitesmoke;
+    text-decoration-color: black;
+    
+  }
+  
+  .app-container {
+    margin-top: 15%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
