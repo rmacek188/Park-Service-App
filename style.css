@@ -1,21 +1,36 @@
-body {
-    background-color: peachpuff;
-  }
-  
-  .bd-placeholder-img {
+* {
+    box-sizing: border-box;
+}
+
+.bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
-  }
-  
-  #app-title {
-    background-color: whitesmoke;
-    text-decoration-color: black;
-    
-  }
-  
-  .app-container {
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+#app-title {
+    background-color: rgb(11, 53, 143);
+}
+
+.navbar {
+    background-color: rgb(0, 102, 128);
+}
+
+.app-container {
     margin-top: 15%;
     margin-left: 10%;
     margin-right: 10%;
-  }
-  
+}
+
+h1 {
+    color: rgb(249, 181, 255);
+}
+
+.hidden {
+    display: none;
+}
