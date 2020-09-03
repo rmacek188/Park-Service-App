@@ -1,49 +1,86 @@
 "use strict";
 
+const apiKey = "aZjjcER2esJyFjxaWbI9KyBV7PTAQZgQ08MrLBz7";
+const searchURL = "https://api.nps.gov/api/v1/parks";
+
+//Activate the Form Event Listener
 $(document).ready(function() {
-  console.log("Ready to fetch GitHub User Repo!");
-  watchSubmitButton();
+    watchSubmitForm();
 });
 
-function userInput() {
-  let wordInput = $("#listen-user-input").val();
-  return wordInput;
+//Watch the Submit Form Listeners
+function watchSubmitForm() {
+    console.log("watchSumbitForm works!");
+    $("#search-form").submit(e => {
+        e.preventDefault();
+        let searchState = $("#state-name-input").val();
+        let numResults = $("#number-input").val();
+        getNationalParks(searchState, numResults);
+    });
 }
 
-function watchSubmitButton() {
-  $("#search-form").submit(e => {
-    console.log("it works!");
-    e.preventDefault();
-    fetchUserName(userInput);
-  });
+//Format Search Query via Params
+function formatQueryParams(params) {
+    console.log("formatQueryParams function works!");
+    const queryItems = Object.keys(params).map(
+        key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+    );
+    return queryItems.join("&");
 }
 
-//Make Request to GitHub API
-function fetchUserName() {
-  fetch("https://api.github.com/users/" + userInput() + "/repos")
-    .then(response => response.json())
-    .then(responseJson => displayResults(responseJson))
-    .catch(error => alert("Hmmm. Cannot find GitHub UserName"));
+//GET Request to National Parks Service API
+function getNationalParks(query, limit) {
+    console.log("getNationalPark works!");
+    if (limit.length === 0) {
+        limit = "10"
+    }
+    const params = {
+        stateCode: query,
+        limit,
+        api_key: apiKey
+    };
+    console.log("params", params)
+    const queryString = formatQueryParams(params);
+    const url = searchURL + "?" + queryString;
+
+    //Test in console whether we get the right search query
+    console.log(url);
+
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .then(responseJson => displayResults(responseJson))
+        .catch(err => {
+            console.log(err);
+            alert("Something went wrong, try again!");
+        });
 }
 
-//Render Repos to the DOM
+//Render GET Request Results to the Dom
 function displayResults(responseJson) {
-  console.log(responseJson);
-  $("#display-profile").empty();
-  let responseHtml = "";
-  responseJson.forEach(userRepo => {
-    responseHtml += `<div class="panel panel-default">
+    console.log("displayResult function works");
+    $("#results-list").empty();
+    for (let i = 0; i < responseJson.data.length; i++) {
+        $("#results-list").append(`<br> <br>
+    <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">${userRepo.name}</h3>
+      <h3 class="panel-title">${responseJson.data[i].fullName}</h3>
     </div>
     <div class="panel-body">
+    <div class= "row>
+     <div class="col-md-3">
+     <h4 class="panel-title">${responseJson.data[i].description}</h4>
+     <p> <p>
+     </div>
      <div class= "row>
      <div class="col-md-3">
-     <a href=" ${userRepo.html_url}">Repo URL Link</a>
+     <a href=" ${responseJson.data[i].url}">Visit Park's Website</a>
      </div>
     </div> 
-  </div>`;
-  });
-  $("#display-profile").html(responseHtml);
-  $(".display-results-container").removeClass("hidden");
+  </div>`);
+    }
+    $("#results-list").removeClass("hidden");
 }
