@@ -1,59 +1,61 @@
-  
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta
-      name="description"
-      content="Thinkful Asynchronous Web App API Assignment"
-    />
-    <meta name="author" content="Alex Cho - Thinkful Student" />
-    <title>GitHub Finder API App</title>
-    <link
-      rel="stylesheet"
-      href="https://bootswatch.com/4/slate/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
 
-  <body>
-    <nav id="app-title" class="navbar">
-      <a class="navbar-brand" href="#">Thinkful GitHub Finder API App</a>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Thinkful Asynchronous Web App API Assignment: GET Request with Complex Data" />
+    <meta name="author" content="Shawn A. Meighn - Thinkful Student" />
+    <title>National Parks Service API Finder</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/slate/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <a id="app-title" class="navbar-brand" href="#">National Parks Service API Finder</a
+      >
     </nav>
 
     <main role="main" class="container">
       <section class="app-container">
         <form id="search-form">
-          <h1>Search GitHub Users</h1>
+          <h1>Search U.S. National Parks</h1>
           <p>
-            Enter a username to fetch someone's profile and repos
+            Enter the state for national parks suggestions
           </p>
           <input
             type="text"
-            id="listen-user-input"
+            id="state-name-input"
             class="form-control"
-            placeholder="Type a GitHub Handler"
+            placeholder="Enter a state"
           />
+          <br />
+          <p>
+            Number of parks you want to review
+          </p>
           <input
-            id="click-submit"
+            type="text"
+            id="number-input"
+            class="form-control"
+            placeholder="Default 10 park results"
+          />
+          <br />
+          <input
+            id="submit-button"
             class="btn btn-primary"
             type="submit"
             value="Submit"
           />
         </form>
       </section>
-      <section class="display-results-container hidden">
-        <div id="display-profile"></div>
+      <section id="results-list" class="container hidden">
+        <p>Park Results</p>
       </section>
     </main>
 
-    <!-- /.container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
