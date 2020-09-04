@@ -8,17 +8,6 @@ $(document).ready(function() {
     watchSubmitForm();
 });
 
-//Watch the Submit Form Listeners
-function watchSubmitForm() {
-    console.log("watchSumbitForm works!");
-    $("#search-form").submit(e => {
-        e.preventDefault();
-        let searchState = $("#state-name-input").val();
-        let numResults = $("#number-input").val();
-        getNationalParks(searchState, numResults);
-    });
-}
-
 //Format Search Query via Params
 function formatQueryParams(params) {
     console.log("formatQueryParams function works!");
@@ -83,4 +72,15 @@ function displayResults(responseJson) {
   </div>`);
     }
     $("#results-list").removeClass("hidden");
+}
+
+//Watch the Submit Form Listeners
+function watchSubmitForm() {
+    console.log("watchSumbitForm works!");
+    $("#search-form").submit(e => {
+        e.preventDefault();
+        let searchState = $("#state-name-input").val();
+        let numResults = $("#number-input").val();
+        getNationalParks(searchState, numResults);
+    });
 }
